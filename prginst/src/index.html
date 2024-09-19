@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programming Tools Installer</title>
+    <style>
+      
+        .content {
+            display: none; /* Initially hide all content */
+        }
+    </style>
+    <link href="./assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="./assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="./assets/css/back.css">
+    <link rel="stylesheet" href="./assets/css/card.css">
+    <link rel="stylesheet" href="./assets/css/result.css">
+    <link rel="stylesheet" href="./assets/css/search.css">
+    <link rel="stylesheet" href="./assets/css/all.css">
+    <script src="./assets/js/jquery.min.js"></script>
+    <script src="./assets/js/markdown-it.min.js"></script>
+    <script src="./assets/js/search.js"></script>
+    <link rel="stylesheet" href="./assets/css/search.css">
+    <!-- <link rel="stylesheet" href="./assets/css/result.css"> -->
+    <script>
+      // async function searchPackage(event) {
+      //     event.preventDefault();
+      //     const query = document.getElementById('searchInput').value;
+      //     const response = await fetch('http://127.0.0.1:5000/search', {
+      //         method: 'POST',
+      //         headers: {
+      //             'Content-Type': 'application/json'
+      //         },
+      //         body: JSON.stringify({ query })
+      //     });
+      //     const results = await response.json();
+      //     const resultsContainer = document.getElementById('searchResults');
+      //     resultsContainer.innerHTML = results.map(result => `
+      //                 <div>
+      //                   ${result}
+      //                 </div>
+      //           `).join('');
+      // }
+      async function searchPackage(event) {
+    event.preventDefault();
+    const query = document.getElementById('searchInput').value;
+    const response = await fetch('http://127.0.0.1:5000/search', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ query })
+    });
+    const results = await response.json();
+    const resultsContainer = document.getElementById('searchResults');
+
+    resultsContainer.innerHTML = `
+        <center><div class="card">
+            <div class="card-body">
+                <h5>Scoop Commands:</h5>
+                <p>${results.map(command => `<span class="badge bg-primary">${command}</span>`).join(' ')}</p>
+            </div>
+        </div></center>
+    `;
+}
+
+
+  </script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark shadow-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand" onclick="showContent('paradox')" style="border-radius: 10px;">
+                <img src="assets/Paradox.png" width="30" height="30" alt="" style="border-radius: 10px;">
+            </a>
+            <!-- <button type="button" class="btn">
+            <a class="navbar-brand" onclick="showContent('home')">Home</a>
+          </button> -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                      <button type="button" class="btn">
+                        <a class="nav-link active" aria-current="page" onclick="showContent('languages')">Languages</a>
+                      </button>
+                    </li>
+                    <li class="nav-item">
+                      <button type="button" class="btn">
+                        <a class="nav-link active" aria-current="page" onclick="showContent('ides')">IDE's</a>
+                      </button>
+                    </li>
+                    <li class="nav-item">
+                      <button type="button" class="btn">
+                        <a class="nav-link active" aria-current="page" onclick="showContent('db')">Databases</a>
+                      </button>
+                    </li>
+                    <li class="nav-item">
+                      <button type="button" class="btn">
+                        <a class="nav-link active" aria-current="page" onclick="showContent('gemini')">Gemini</a>
+                      </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div id="paradoxContent" class="content">
+      <center><h1 style="color: white; font-size: 70px;"><b>Programming Tools Installer</b></h1></center>
+      <div class="container h-10">
+          <div class="d-flex justify-content-center h-100">
+              <div class="searchbar">
+                  <form onsubmit="searchPackage(event)" style="display: flex; align-items: center;">
+                      <input class="search_input" type="text" id="searchInput" placeholder="Search...">
+                      <button type="submit" class="search_icon"><ion-icon name="search"></ion-icon></button>
+                  </form>
+              </div>
+          </div>
+      </div>
+      <div id="searchResults" class="results"></div>
+    </div>
+    <div id="homeContent" class="content">
+      <!-- <div class="card-container" style="margin-left: 50px;">
+        <h1 class="card-text" style="text-align: center;color: aliceblue;"><b>Batch Installation</b></h1>
+        <div class="card">
+          <button type="button" class="btn">
+          <img src="./assets/batch.png" style="border-radius: 20px;" >
+        </button>
+        </div>
+      </div> -->
+      <div class="card-container" style="margin-left: 10px;flex-direction: column;">
+        <h1 class="card-text" style="text-align: center;color: aliceblue;"><b>Custom Installation</b></h1>
+        <div class="card">
+          <button type="button" class="btn">
+          <img src="./assets/custom.png" style="border-radius: 20px;" >
+        </button>
+        </div>
+      </div>
+  </div>
+    <div id="languagesContent" class="content">
+    <center>
+      <div class="container text-center">
+        <div class="row">
+          <div class="col">
+            <div class="card-container">
+              <div class="card" style="justify-content: center;">
+                <button type="button" class="btn" id="python">
+              <img src="./assets/python.png" style="border-radius: 20px;">
+            </button>
+          </div>
+        </div>
+          </div>
+          <div class="col">
+            <div class="card-container">
+              <div class="card" style="justify-content: center;">
+                <button type="button" class="btn" id="java">
+              <img src="./assets/java.png" style="border-radius: 20px;">
+            </button>
+          </div>
+        </div>
+          </div>
+          <div class="col">
+            <div class="card-container">
+              <div class="card" style="justify-content: center;">
+                <button type="button" class="btn" id="cppc">
+              <img src="./assets/cpp.png" style="border-radius: 20px;">
+            </button>
+          </div>
+        </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="card-container">
+              <div class="card" style="justify-content: center;">
+                <button type="button" class="btn" id="node">
+              <img src="./assets/node.png" style="border-radius: 20px;">
+            </button>
+          </div>
+        </div>
+          </div>
+          <div class="col">
+            <div class="card-container">
+              <div class="card" style="justify-content: center;">
+                <button type="button" class="btn" id="cs">
+              <img src="./assets/csharp.png" style="border-radius: 20px;">
+            </button>
+          </div>
+        </div>
+          </div>
+          <div class="col">
+            <div class="card-container">
+              <div class="card" style="justify-content: center;">
+                <button type="button" class="btn" id ="go">
+              <img src="./assets/go.png" style="border-radius: 20px;">
+            </button>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+      </center>
+</div>
+    <div id="idesContent" class="content">
+        <center>
+            <div class="container text-center">
+              <div class="row">
+                <div class="col">
+                  <div class="card-container">
+                    <div class="card" style="justify-content: center;">
+                      <button type="button" class="btn" id="vsc">
+                    <img src="./assets/vscode.png" style="border-radius: 20px;">
+                  </button>
+                </div>
+              </div>
+                </div>
+                <div class="col">
+                  <div class="card-container">
+                    <div class="card" style="justify-content: center;">
+                      <button type="button" class="btn" ic="eclipse">
+                    <img src="./assets/eclipse.png" style="border-radius: 20px;">
+                  </button>
+                </div>
+              </div>
+                </div>
+                <div class="col">
+                  <div class="card-container">
+                    <div class="card" style="justify-content: center;">
+                      <button type="button" class="btn" id="pycharm">
+                    <img src="./assets/pycharm.png" style="border-radius: 20px;">
+                  </button>
+                </div>
+              </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="card-container">
+                    <div class="card" style="justify-content: center;">
+                      <button type="button" class="btn" id="arduino">
+                    <img src="./assets/arduino.png" style="border-radius: 20px;">
+                  </button>
+                </div>
+              </div>
+                </div>
+                <div class="col">
+                  <div class="card-container">
+                    <div class="card" style="justify-content: center;">
+                      <button type="button" class="btn" id="vs">
+                    <img src="./assets/vs.png" style="border-radius: 20px;">
+                  </button>
+                </div>
+              </div>
+                </div>
+                <div class="col">
+                  <div class="card-container">
+                    <div class="card" style="justify-content: center;">
+                      <button type="button" class="btn" id="android">
+                    <img src="./assets/android.png" style="border-radius: 20px;">
+                  </button>
+                </div>
+              </div>
+                </div>
+              </div>
+            </div>
+            </center>
+</div>
+<div id="dbContent" class="content">
+  <center>
+    <div class="container text-center">
+      <div class="row">
+        <div class="col">
+          <div class="card-container">
+            <div class="card" style="justify-content: center;">
+              <button type="button" class="btn" id="mysql">
+            <img src="./assets/mysql.png" style="border-radius: 20px;">
+          </button>
+        </div>
+      </div>
+        </div>
+        <div class="col">
+          <div class="card-container">
+            <div class="card" style="justify-content: center;">
+              <button type="button" class="btn" id="mongo">
+            <img src="./assets/mongo.png" style="border-radius: 20px;">
+          </button>
+        </div>
+      </div>
+        </div>
+        <div class="col">
+          <div class="card-container">
+            <div class="card" style="justify-content: center;">
+              <button type="button" class="btn" id="postgre">
+            <img src="./assets/postgresql.png" style="border-radius: 20px;">
+          </button>
+        </div>
+      </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="card-container">
+            <div class="card" style="justify-content: center;">
+              <button type="button" class="btn" id="maria">
+            <img src="./assets/maria.png" style="border-radius: 20px;">
+          </button>
+        </div>
+      </div>
+        </div>
+        <div class="col">
+          <div class="card-container">
+            <div class="card" style="justify-content: center;">
+              <button type="button" class="btn" id="fire">
+            <img src="./assets/firebase.png" style="border-radius: 20px;">
+          </button>
+        </div>
+      </div>
+        </div>
+        <div class="col">
+          <div class="card-container">
+            <div class="card" style="justify-content: center;">
+              <button type="button" class="btn" id ="nosql">
+            <img src="./assets/nosql.png" style="border-radius: 20px;">
+          </button>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+    </center>
+</div>
+    <!-- <div id="geminiContent" class="content">
+    <center>	<nav class="navbar navbar-expand-lg navbar-light sticky-top top-0 shadow py-0 bg-skyblue dark-theme">
+      <a class="navbar-brand logo pl-4 dark-text" href="https://aistudio.google.com/app/apikey" target="blank" >
+         <h3><p style="color: #4285F4; display: inline;">G</p>
+          <p style="color: #EA4335; display: inline;">O</p>
+          <p style="color: #FBBC05; display: inline;">O</p>
+          <p style="color: #34A853; display: inline;">G</p>
+          <p style="color: #4285F4; display: inline;">L</p>
+          <p style="color: #EA4335; display: inline;">E</p>
+          </h3>
+      </a>
+      <a href="https://github.com/ab007shetty" target="blank" class="github-corner" aria-label="View source on GitHub">
+        <svg width="50" height="50" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; left: 0; transform: scale(-1, 1);" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path>
+        </svg>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+  
+          <div class="collapse navbar-collapse " id="navbarNav">
+              <ul class="navbar-nav ml-auto mt-2 mt-lg-0 mb-1 ">
+                   <li class="nav-item">
+            <div class="d-flex align-items-center">
+              <input type="text" id="apiKey" value="" class="form-control mr-1 dark-theme" size="55" placeholder="Paste your Google Gemini apiKey here...">
+              <label class="switch mb-0 pl-5">
+                <input type="checkbox" id="darkModeToggle" >
+                <span class="slider round"></span>
+              </label>
+            </div>
+          </li>
+              </ul>
+          </div>
+    </nav>
+    <div class="container-fluid bg-secondary">
+      <div class="row ">
+        <div class="col-md-12 mb-3">
+          <div class="card mt-3">
+            <div class="card-header row">
+              <div class="col-6 ">
+                <h3>Gemini</h3>						
+              </div>					
+              <div class="col-6 offset-md-3 col-md-3 text-right">	
+                <a  type="button" onclick="window.print()" class="btn  btn-outline-info">Print</a>						
+                <a  type="button" class="btn btn-outline-danger " onclick="clearContent()">Clear</a>
+              </div>
+            </div>
+            <div class="card-body chat-box rounded p1" id="chatbox"><span id="copy-popup" class="popup">Copied!</span></div>
+            <div class="card-footer">					
+            <div class="form-group row">
+              <div class="col-md-7 mb-1">
+                <textarea id="userInput" rows="1" class="form-control dark-theme" placeholder="Type your message here..."></textarea>
+              </div>
+              <div class="col-md-3">
+                <label for="userfile" class="btn btn-secondary btn-block ">
+                  <i class="bi bi-image "></i> <span id="fileLabel">Choose an Image to get its Details</span>
+                  <input type="file" name="file" id="userfile" accept="image/*" class="form-control" style="display: none;" onchange="updateFileLabel()">
+                  <img id="output" width="40" height="25" style="display: none;" class="float-right "/>
+                </label>
+              </div>
+              <div class="col-md-2">
+                <input id="sendButton" type="button" value="SUBMIT" class=" form-control btn btn-success btn-block " />
+              </div>
+            </div>						
+            </div>
+          </div>
+        </div>
+      </div>
+    </div></center>
+</div> -->
+<div id="geminiContent" class="content" style="height:90vh; width:90vw; margin: auto;border-radius: 20px;">
+  <iframe src="https://gemini-ui-add6.onrender.com/" width="100%" height="100%" style="border-radius: 20px;"></iframe>
+</div>
+<script src="./assets/js/crypto-js.js"></script>
+    <script>
+        
+        function showContent(contentType) {
+            // Hide all content divs
+            var allContentDivs = document.querySelectorAll('.content');
+            allContentDivs.forEach(function(div) {
+                div.style.display = 'none';
+            });
+
+            // Show the selected content
+            var selectedContentDiv = document.getElementById(contentType + 'Content');
+            if (selectedContentDiv) {
+                selectedContentDiv.style.display = 'block';
+            }
+        }
+    </script>
+       <script src="renderer.js"></script>
+       <script src="preload.js"></script>
+       <script>
+        function updateFileLabel() {
+            const fileInput = document.getElementById("userfile");
+            const fileLabel = document.getElementById("fileLabel");
+        const image = document.getElementById('output');
+        const file = fileInput.files[0];
+        
+            if (fileInput.files.length > 0) {			
+          const maxLength = 25; // Set your desired maximum length
+          const fileName = file.name.length > maxLength ? file.name.substring(0, maxLength) + "..." : file.name;
+     
+                fileLabel.innerText = fileName;
+          image.style.display = 'block';
+          image.src = URL.createObjectURL(file);
+            } else {
+                fileLabel.innerText = "Choose an Image to get its Details";
+          image.style.display = 'none';
+            }
+        }
+    </script>
+    <script>
+    const toggleSwitch = document.querySelector('#darkModeToggle');
+    toggleSwitch.addEventListener('change', switchTheme);
+    
+    function switchTheme(event) {
+      if (event.target.checked) {
+        document.body.classList.add('dark-mode');
+      document.nav.classList.remove('bg-skyblue');
+      } else {
+        document.body.classList.remove('dark-mode');
+      }   
+    }
+    </script>	
+    <!-- <script>
+    function clearContent(){
+        document.getElementById('chatbox').innerHTML = '';
+    }
+    
+    const url = new URL(window.location.href);
+    const key = url.searchParams.get('key');
+        if (key) {
+                $("#apiKey").val(key);
+                $("#apiKey").hide();
+        }	
+    const chatbox = $("#chatbox");
+    const userInput = $("#userInput");
+    const file = $("#userfile");
+    const sendButton = $("#sendButton");
+    let contents = [];
+    
+    userInput.on("keydown", (event) => {
+        if (event.keyCode === 13 && !event.ctrlKey && !event.shiftKey) {
+            event.preventDefault();
+            sendButton.click();
+        } else if (event.keyCode === 13 && (event.ctrlKey || event.shiftKey)) {
+            event.preventDefault();
+            const cursorPosition = userInput.prop("selectionStart");
+            const currentValue = userInput.val();
+    
+            userInput.val(
+                currentValue.slice(0, cursorPosition) +
+                "\n" +
+                currentValue.slice(cursorPosition)
+            );
+            userInput.prop("selectionStart", cursorPosition + 1);
+            userInput.prop("selectionEnd", cursorPosition + 1);
+        }
+    });
+    
+    const getBase64Image = (file) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        return new Promise((resolve, reject) => {
+            reader.onload = () => resolve(reader.result.split(',')[1]);
+            reader.onerror = (error) => reject(error);
+        });
+    };
+    
+    
+    sendButton.on("click", () => {
+        const input = document.getElementById("userfile");	
+      const message = userInput.val();
+    
+      if (message === "" && input.files.length === 0) {
+        alert("Please provide Text or Image input.");
+        return; 
+      }
+    if (input && input.files.length > 0) {
+      const file = input.files[0];
+      const imgsrc = URL.createObjectURL(file);
+    
+      getBase64Image(file).then((base64String) => {
+      
+      if (message === "") {
+      let userMessageHtml = '<pre><div class="message right-side "  ><img class="img-thumbnail mb-2" width="400" src=" ' + imgsrc + ' "/></div></pre>';
+      chatbox.append(userMessageHtml);  
+        fetchreply(message, base64String);
+      }
+      else {
+        const displaytext = window.markdownit().render(message);
+      let userMessageHtml = '<pre><div class="message right-side "  >' + displaytext + '</div></pre>';
+        chatbox.append(userMessageHtml);  
+        fetchreply(message, base64String);
+      }		
+      });
+    }
+    else {
+        if (message) {
+            contents.push({
+                "role": "user",
+                "parts": [
+                    {
+                        "text": message
+                    }
+                ]
+            });
+    const displaytext = window.markdownit().render(message); 
+      let userMessageHtml = '<pre><div class="message right-side "  >' + displaytext + '</div></pre>';
+      chatbox.append(userMessageHtml);      
+            fetchMessages();
+        }
+      }
+      chatbox.animate({ scrollTop: 20000000 }, "slow");
+        userInput.val("");
+        sendButton.val("Generating Response...");
+        sendButton.prop("disabled", true); 
+    });
+    
+    
+    function fetchreply(message,base64String) {
+        const apiKey = $("#apiKey").val();
+        var settings = {
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro-vision:generateContent?key=" + apiKey,
+      "method": "POST",
+      "timeout": 0,
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "data": JSON.stringify({
+          "contents": [
+            {
+            "parts": [
+              {
+              "text": message
+              },
+              {
+              "inline_data": {
+                "mime_type": "image/jpeg",
+                 "data": base64String
+              }
+              }
+            ]
+            }
+          ]
+          })
+    };
+    $.ajax(settings).done(function(response) { processAjaxResponse(response); })
+        .fail(function(jqXHR, textStatus, errorThrown) { handleAjaxFailure(jqXHR);});
+    }
+      
+    function fetchMessages() {
+        const apiKey = $("#apiKey").val();
+        var settings = {
+          "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=" + apiKey,
+          "method": "POST",
+          "timeout": 0,
+          "headers": {
+            "Content-Type": "application/json"
+          },
+    
+          "data": JSON.stringify({
+            "contents": contents
+          })
+        }; 
+        $.ajax(settings).done(function(response) { processAjaxResponse(response); })
+        .fail(function(jqXHR, textStatus, errorThrown) { handleAjaxFailure(jqXHR);});
+    }
+    
+    function processAjaxResponse(response) {
+        console.log(response);
+        const reply = response.candidates[0].content;
+        contents.push({
+            "role": reply.role,
+            "parts": [{
+                "text": reply.parts[0].text
+            }]
+        });
+        const htmlText = window.markdownit().render(reply.parts[0].text);
+        const botMessageHtml = '<pre><div class="message left-side" id="' + CryptoJS.MD5(htmlText) + '">' + htmlText + '</div><i class="far fa-clipboard ml-1 btn btn-outline-dark" id="' + CryptoJS.MD5(htmlText) + '-copy"></i></pre>';
+    
+        chatbox.append(botMessageHtml);
+    
+        // Add event listener to the copy icon 
+        var copyIcon = document.getElementById(CryptoJS.MD5(htmlText) + '-copy');
+        var copyText = document.getElementById(CryptoJS.MD5(htmlText));
+    
+        copyIcon.addEventListener("click", function () {
+            var tempTextarea = document.createElement("textarea");
+            tempTextarea.value = copyText.textContent;
+            document.body.appendChild(tempTextarea);
+            tempTextarea.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempTextarea);
+    
+            // Display "Copied!" popup
+            var copyPopup = document.getElementById("copy-popup");
+            copyPopup.style.display = "block";
+            setTimeout(function () {
+                copyPopup.style.display = "none";
+            }, 1000); // Display for 1 second
+        });
+    
+        chatbox.animate({
+            scrollTop: 20000000
+        }, "slow");
+        sendButton.val("SUBMIT");
+        sendButton.prop("disabled", false);
+    }
+    
+    function handleAjaxFailure(jqXHR) {
+        // Handle failure
+        sendButton.val("Error");
+        let errorText = "Error: " + jqXHR.responseJSON.error.message;
+        let errorMessage = '<pre><div class="message left-side text-danger" >' + errorText + '</div></pre>';
+        chatbox.append(errorMessage);
+        chatbox.animate({
+            scrollTop: 20000000
+        }, "slow");
+    }   
+    </script> -->
+    <script>
+     $(document).ready(function(){
+      $("#searchIcon").on('click',function(event){
+          var inputtext=$("#searchInput").val();
+          $("#result").val()=inputtext;
+      });
+     });
+    </script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>
